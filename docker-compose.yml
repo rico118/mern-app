@@ -1,0 +1,22 @@
+version : "1"
+services: 
+  web: 
+    build: . 
+    ports:
+    - 4000:4000
+    depends_on:
+    - mongo
+  mongo:
+    image: mongo
+    volumes: 
+    - dataDb:/data/db
+    ports:
+    - 27017:27017
+  react:
+    build: fe/.
+    ports:
+    - 4173:4173
+    stdin_open: true
+    tty: true
+    depends_on: 
+    - web
